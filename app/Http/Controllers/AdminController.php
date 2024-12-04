@@ -77,3 +77,4 @@ class AdminController extends Controller
         return view('admin.dashboard',compact('arizalar','data','latestData','alarmChartData','chartData'));
     }
 }
+//asd
