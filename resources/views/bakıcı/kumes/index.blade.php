@@ -13,7 +13,7 @@
             <thead>
               <tr>
                 <th scope="col">Kümes</th>
-            
+                <th scope="col">SN</th>
                 <th scope="col">Dış Isı</th>
                 <th scope="col">İç Isı</th>
                 <th scope="col">Nem</th>
@@ -32,6 +32,7 @@
                 @foreach ($coops as $coop)
                 <tr>
                     <th>{{ $coop->name  }}</th>
+                    <th>{{ $coop->id  }}</th>
                     <th>{{ $coop->endkonData->last()->DI ?? '-' }}°C</th>
                     <th>{{ $coop->endkonData->last()->ISI ?? '-' }}°C</th>
                     <th>%{{ $coop->endkonData->last()->NE ?? '-' }}</th>

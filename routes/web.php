@@ -46,7 +46,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 Route::middleware(['auth', 'role:bakıcı'])->group(function () {
     Route::get('/bakıcı/dashboard', [CaretakerController::class, 'index'])->name('bakici_dashboard');
-    
+    Route::resource('bakici_alarm', ArizaController::class);
+    Route::resource('bakici_veri', DataController::class);
     
 });
 
@@ -90,10 +91,7 @@ Route::get('/kumes/{id}/ortak-data', [KumesDashboardController::class, 'ortakDat
 Route::post('/messages/{id}/mark-as-read', [MessageController::class, 'markAsRead'])->name('messages.markAsRead');
 
 
-/**/
-Route::resource('bakici_kumes', CaretakerKumesController::class);
-Route::resource('bakici_alarm', ArizaController::class);
-Route::resource('bakici_veri', DataController::class);
+
 Route::get('/expired', function () {
     return view('layout.expired'); // layout.expired view dosyasına yönlendirilir
 })->name('expired');

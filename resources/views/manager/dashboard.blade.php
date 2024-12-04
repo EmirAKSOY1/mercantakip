@@ -35,7 +35,7 @@
         margin-bottom: 30px;
     }
     #total_animal{
-      height: 385px;
+      height: 405px;
     }
     /* #alarmChart{
         margin: 50px;
@@ -222,7 +222,7 @@
       <div class="col-12 col-xxl-8 order-2 order-md-3 order-xxl-2 mb-6">
         <div class="card" id="total_animal">
           <div class="row row-bordered g-0">
-            <canvas id="alarmChart" width="900" height="350"></canvas>
+            <canvas id="alarmChart" width="900" height="380"></canvas>
   
           </div>
         </div>

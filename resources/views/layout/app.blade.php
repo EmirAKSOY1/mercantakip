@@ -275,7 +275,7 @@ li{
                 <ul class="menu-inner py-1">
 
 
-
+                    <br>
                     @foreach($menus as $menu)
                     <li class="menu-item">
                         <a href="{{route($menu['route'])}}" class="menu-link">

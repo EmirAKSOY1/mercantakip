@@ -46,7 +46,6 @@ class AppServiceProvider extends ServiceProvider
                 case 'bakıcı':
                     $menus = [
                         ['title' => 'Anasayfa' , 'route' => 'bakici_dashboard','icon' =>'fa-solid fa-gauge'],
-                        ['title' => 'Kümesler' , 'route' => 'bakici_kumes.index','icon' =>'fa-solid fa-wheat-awn'],
                         ['title' => 'Alarmlar' , 'route' => 'bakici_alarm.index','icon' =>'fa-solid fa-bell'],
                         ['title' => 'Veriler'  ,  'route' => 'bakici_veri.index','icon' =>'fa-solid fa-database'],
                         

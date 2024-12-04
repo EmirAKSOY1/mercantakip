@@ -14,6 +14,13 @@ h3{
     }
 
 }
+.btn{
+    padding: 0;
+    margin-right:25px;
+}
+.table > :not(caption) > * > * {
+  padding: 0.8rem;
+}
 </style>
 @endsection
 @section('content') 
@@ -41,30 +48,57 @@ h3{
                 <th scope="col">Yem</th>
                 <th scope="col">Ölüm</th>
                 <th scope="col">Tarih</th>
+                <th scope="col">İşlemler</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($entegre->coops as $coop)
+            @foreach ($datas as $data)
             <tr>
                 <th>
-                    <a href="{{ route('endkon_data.show', $coop->id) }}" >
-                        {{ $coop->name ?? '-' }}
+                    <a href="{{ route('endkon_data.show', $data->id) }}" >
+                        {{ $data->name ?? '-' }}
                     </a>
                 </th>
-                <th>{{ $coop->endkonData->last()->DI ?? '-' }}°C</th>
-                <th>{{ $coop->endkonData->last()->ISI ?? '-' }}°C</th>
-                <th>%{{ $coop->endkonData->last()->NE ?? '-' }}</th>
-                <th>{{ $coop->endkonData->last()->CO ?? '-' }}pPm</th>
-                <th>{{ $coop->dailyData->last()->s1 ?? '-' }}</th>
-                <th>{{ $coop->dailyData->last()->s2 ?? '-' }}</th>
-                <th>{{ $coop->hourlyData->last()->st ?? '-' }} Lt</th>
-                <th>{{ $coop->hourlyData->last()->yt ?? '-' }} Kg</th>
-                <th>{{ $coop->dailyData->last()->os ?? '-' }}</th>
-                <th>{{ $coop->endkonData->last()->tarih ?? '-' }}</th>
+                <th>{{ $data->endkonData->first()->DI ?? '-' }}°C</th>
+                <th>{{ $data->endkonData->first()->ISI ?? '-' }}°C</th>
+                <th>%{{ $data->endkonData->first()->NE ?? '-' }}</th>
+                <th>{{ $data->endkonData->first()->CO ?? '-' }}pPm</th>
+                <th>{{ $data->dailyData->first()->s1 ?? '-' }}</th>
+                <th>{{ $data->dailyData->first()->s2 ?? '-' }}</th>
+                <th>{{ $data->hourlyData->first()->st ?? '-' }} <span>Lt</span></th>
+                <th>{{ $data->hourlyData->first()->yt ?? '-' }} Kg</th>
+                <th>{{ $data->dailyData->first()->os ?? '-' }}</th>
+                <th>{{ $data->endkonData->first()->tarih ?? '-' }}</th>
+                <th>
+                    <button type="button" class="btn" onclick="window.location='{{ route('kumes.gosterge', $data->id) }}'"><i class="fa-solid fa-gauge"></i></button> 
+                    <button type="button" class="btn" onclick="window.location='{{ route('kumes.dashboard', $data->id) }}'"><i class="fa-solid fa-chart-line"></i></button> 
+                    <div class="btn-group">
+                        <button type="button" id="seri" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-file-export"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <button type="button" class="btn" onclick="window.location='{{ route('generate-pdf',$data->id) }}'">
+                                    <i class="fa-solid fa-file-pdf"></i>(Pdf)
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" id="seri" class="btn" onclick="window.location='{{ route('export.endkon.data',$data->id) }}'">
+                                    <i class="fa-solid fa-file-excel"></i> (Excel)
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </th>
             </tr>
         @endforeach
         </tbody>
     </table>
+    
+    <div class="pagination-wrapper">
+        {{$datas->links('pagination::bootstrap-4') }} 
+        
+    </div>
     @endif
     </div>
 </div>
