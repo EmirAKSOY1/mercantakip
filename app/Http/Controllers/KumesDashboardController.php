@@ -242,7 +242,7 @@ class KumesDashboardController extends Controller
                 )
                 ->where('KUMES_ID', $id)
                 ->orderBy('tarih', 'desc') // En son veriler
-                ->orderBy('date', 'desc') // En son veriler
+                ->orderBy('date', 'asc') // En son veriler
                 ->limit(30) // Son 30 kayıt
                 ->get();
             break;

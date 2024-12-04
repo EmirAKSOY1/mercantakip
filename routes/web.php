@@ -41,7 +41,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin_dashboard');
     Route::resource('admin_support',AdminSupportController::class);
     Route::resource('admin_log',LogController::class);
-    
+    Route::get('/grafik', function () {
+        return view("admin.grafik");
+    });
 });
 
 Route::middleware(['auth', 'role:bakıcı'])->group(function () {

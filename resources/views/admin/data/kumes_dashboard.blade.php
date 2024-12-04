@@ -20,16 +20,18 @@
     .styled-button:hover {
         background-color: #45a049;
         box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
-
+    }
     .styled-button:active {
         transform: scale(0.98);
-    h3{
-        color:#3c8dbc;
+    }
+    .form-control{
+        display:inline-block;
+        width:40%;
     }
 </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 @endsection
 @section('content') 
-
 
 <div class="container">
     <br>
@@ -39,18 +41,9 @@
             <button class="styled-button" onclick="ortakupdatechart('daily')"  >Günlük  </button>
             <button class="styled-button" onclick="ortakupdatechart('weekly')" >Haftalık</button>
             <button class="styled-button" onclick="ortakupdatechart('monthly')">Aylık   </button>
+            <input class="form-control" type="date" id="tarih_araligi" name="start-date" placeholder="Tarih Aralığı Seçiniz...">
         </div>
-                <!-- Tarih Seçme Alanları -->
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="margin-bottom: 10px;">
-                        <label for="start-date" style="margin-right: 10px;">Başlangıç Tarihi:</label>
-                        <input class="form-control" type="date" id="start-date" name="start-date">
-                    </div>
-                    <div>
-                        <label for="end-date" style="margin-right: 10px;">Bitiş Tarihi:</label>
-                        <input class="form-control" type="date" id="end-date" name="end-date">
-                    </div>
-                </div>
+
         <div style="width:100%;height:auto;">
             <canvas id="ortakchart"></canvas>
         </div>
@@ -719,11 +712,7 @@ document.addEventListener('DOMContentLoaded', function () {
         duration: 1000, // 1 saniye süren animasyon
         easing: 'easeInOut' // Yumuşak bir geçiş animasyonu
 
-    },        scales:{
-            x:{
-                reverse:true
-            }
-        }
+    }
         }
     };
     waterchart = new Chart(document.getElementById('waterchart'),waterconfig );
@@ -742,9 +731,29 @@ document.addEventListener('DOMContentLoaded', function () {
     coupdatechart('minutely');
     ortakupdatechart('minutely');
 });
-document.getElementById('resetZoom').addEventListener('click', function() {
-    isichart.resetZoom();
-});
 
+</script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/tr.js"></script>
+<script>
+    // flatpickr ile tarih aralığı seçimi
+    flatpickr("#tarih_araligi", {
+        mode: "range",  // range modunda, başlangıç ve bitiş tarihi seçilebilir
+        dateFormat: "d-m-Y",  // Tarih formatı
+         locale: "tr",
+        onChange: function(selectedDates, dateStr, instance) {
+            if (selectedDates.length == 2) {
+                const [startDate, endDate] = selectedDates;
+                // Tarihleri konsola yazdır
+                console.log(`Başlangıç Tarihi: ${startDate.toLocaleDateString()}`);
+                console.log(`Bitiş Tarihi: ${endDate.toLocaleDateString()}`);
+
+                // Eğer başlangıç tarihi, bitiş tarihinden büyükse uyarı ver
+                if (startDate > endDate) {
+                    alert('Başlangıç tarihi, bitiş tarihinden büyük olamaz!');
+                }
+            }
+        }
+    });
 </script>
 @endsection

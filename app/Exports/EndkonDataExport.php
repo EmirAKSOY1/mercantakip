@@ -22,20 +22,21 @@ class EndkonDataExport implements FromCollection, WithHeadings, WithTitle
     */
     public function collection()
     {
-        return EndkonData::where('KUMES_ID', $this->kumesId)->get();
+        return EndkonData::where('KUMES_ID', $this->kumesId)
+        ->select(['SN', 'ISI', 'DI', 'SE', 'NE', 'CO', 'TARIH', 'CREATED_AT'])
+        ->get();
     }
     public function headings(): array
     {
         return [
-            'id',
-            'SN',
-            'ISI',
-            'DI',
-            'SE',
-            'NE',
-            'CO',
-            'tarih',
-            'KUMES_ID'
+            'Seri Numarası',
+            'Isı',
+            'Dış Isı',
+            'Set Isı',
+            'Nem',
+            'Co2',
+            'Tarih',
+            'Gelme Tarihi(GMT+3)'
         ];
     }
     public function title(): string

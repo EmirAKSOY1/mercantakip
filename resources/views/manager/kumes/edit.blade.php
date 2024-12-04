@@ -19,7 +19,7 @@
 </style>
 @endsection
 @section('content') 
-
+mercanam radyoka
 	<div class="container">
         
         <form action="{{ route('manager_kumes.update',$kumes->id) }}" method="POST">
@@ -29,11 +29,6 @@
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Kümes Adı</label>
                 <input type="text" class="form-control" name="name" id="exampleFormControlInput1" value="{{$kumes->name}}">
-            </div>
-            <br>
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Kümes Kapasitesi</label>
-                <input type="number" class="form-control" name="kapasite" id="exampleFormControlInput1" value="{{$kumes->capacity}}">
             </div>
             <br>
             <div id="map" style="height: 400px;"></div>
