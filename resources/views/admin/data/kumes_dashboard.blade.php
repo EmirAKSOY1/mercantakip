@@ -32,57 +32,105 @@
 
 
 <div class="container">
-
-    <div class="ortak">
+    <br>
         <div style="text-align: center; margin-bottom: 20px;">
+            <button class="styled-button" onclick="ortakupdatechart('minutely')" >Dakikalık </button>
             <button class="styled-button" onclick="ortakupdatechart('hourly')" >Saatlik </button>
             <button class="styled-button" onclick="ortakupdatechart('daily')"  >Günlük  </button>
             <button class="styled-button" onclick="ortakupdatechart('weekly')" >Haftalık</button>
             <button class="styled-button" onclick="ortakupdatechart('monthly')">Aylık   </button>
         </div>
-        
-        <div style="width:80%;height:auto;">
+                <!-- Tarih Seçme Alanları -->
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="margin-bottom: 10px;">
+                        <label for="start-date" style="margin-right: 10px;">Başlangıç Tarihi:</label>
+                        <input class="form-control" type="date" id="start-date" name="start-date">
+                    </div>
+                    <div>
+                        <label for="end-date" style="margin-right: 10px;">Bitiş Tarihi:</label>
+                        <input class="form-control" type="date" id="end-date" name="end-date">
+                    </div>
+                </div>
+        <div style="width:100%;height:auto;">
             <canvas id="ortakchart"></canvas>
         </div>
     </div>
     <br>
-
+    <hr>
     <div class="isi">
         <div style="text-align: center; margin-bottom: 20px;">
-            <button class="styled-button" onclick="isiupdatechart('hourly')" >Saatlik </button>
-            <button class="styled-button" onclick="isiupdatechart('daily')"  >Günlük  </button>
-            <button class="styled-button" onclick="isiupdatechart('weekly')" >Haftalık</button>
-            <button class="styled-button" onclick="isiupdatechart('monthly')">Aylık   </button>
+            <button class="styled-button" onclick="isiupdatechart('minutely')">Dakikalık </button>
+            <button class="styled-button" onclick="isiupdatechart('hourly')"  >Saatlik </button>
+            <button class="styled-button" onclick="isiupdatechart('daily')"   >Günlük  </button>
+            <button class="styled-button" onclick="isiupdatechart('weekly')"  >Haftalık</button>
+            <button class="styled-button" onclick="isiupdatechart('monthly')" >Aylık   </button>
         </div>
-        
-        <div style="width:80%;height:auto;">
+                <!-- Tarih Seçme Alanları -->
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="margin-bottom: 10px;">
+                        <label for="start-date" style="margin-right: 10px;">Başlangıç Tarihi:</label>
+                        <input class="form-control" type="date" id="start-date" name="start-date">
+                    </div>
+                    <div>
+                        <label for="end-date" style="margin-right: 10px;">Bitiş Tarihi:</label>
+                        <input class="form-control" type="date" id="end-date" name="end-date">
+                    </div>
+                </div>
+        <div style="width:100%;height:auto;">
             <canvas id="isichart"></canvas>
         </div>
+        
     </div>
     <br>
-
+<hr>
 
     <div class="di">
         <div style="text-align: center; margin-bottom: 20px;">
-            <button class="styled-button" onclick="diupdatechart('hourly')" >Saatlik </button>
-            <button class="styled-button" onclick="diupdatechart('daily')"  >Günlük  </button>
-            <button class="styled-button" onclick="diupdatechart('weekly')" >Haftalık</button>
+            <button class="styled-button" onclick="diupdatechart('minutely')">Dakikalık </button>
+            <button class="styled-button" onclick="diupdatechart('hourly')">Saatlik </button>
+            <button class="styled-button" onclick="diupdatechart('daily')">Günlük  </button>
+            <button class="styled-button" onclick="diupdatechart('weekly')">Haftalık</button>
             <button class="styled-button" onclick="diupdatechart('monthly')">Aylık   </button>
         </div>
-        
-        <div style="width:80%;height:auto;">
+    
+        <!-- Tarih Seçme Alanları -->
+        <div style="text-align: center; margin-bottom: 20px;">
+            <div style="margin-bottom: 10px;">
+                <label for="start-date" style="margin-right: 10px;">Başlangıç Tarihi:</label>
+                <input class="form-control" type="date" id="start-date" name="start-date">
+            </div>
+            <div>
+                <label for="end-date" style="margin-right: 10px;">Bitiş Tarihi:</label>
+                <input class="form-control" type="date" id="end-date" name="end-date">
+            </div>
+        </div>
+    
+        <div style="width: 80%; height: auto;">
             <canvas id="dichart"></canvas>
         </div>
     </div>
-    <br>
     
+    <br>
+    <hr>
     <div class="nem">
         <div style="text-align: center; margin-bottom: 20px;">
+            <button class="styled-button" onclick="nemupdatechart('minutely')">Dakikalık </button>
             <button class="styled-button" onclick="nemupdatechart('hourly')" >Saatlik </button>
             <button class="styled-button" onclick="nemupdatechart('daily')"  >Günlük  </button>
             <button class="styled-button" onclick="nemupdatechart('weekly')" >Haftalık</button>
             <button class="styled-button" onclick="nemupdatechart('monthly')">Aylık   </button>
         </div>
+                <!-- Tarih Seçme Alanları -->
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="margin-bottom: 10px;">
+                        <label for="start-date" style="margin-right: 10px;">Başlangıç Tarihi:</label>
+                        <input class="form-control" type="date" id="start-date" name="start-date">
+                    </div>
+                    <div>
+                        <label for="end-date" style="margin-right: 10px;">Bitiş Tarihi:</label>
+                        <input class="form-control" type="date" id="end-date" name="end-date">
+                    </div>
+                </div>
         {{-- <h3>Nem Analizi(°)</h3> --}}
         <div style="width:80%;height:auto;">
             <canvas id="nemchart"></canvas>
@@ -92,6 +140,7 @@
 
     <div class="co">
         <div style="text-align: center; margin-bottom: 20px;">
+            <button class="styled-button" onclick="coupdatechart('minutely')" >Dakikalık </button>
             <button class="styled-button" onclick="coupdatechart('hourly')" >Saatlik </button>
             <button class="styled-button" onclick="coupdatechart('daily')"  >Günlük  </button>
             <button class="styled-button" onclick="coupdatechart('weekly')" >Haftalık</button>
@@ -103,7 +152,7 @@
         </div>
     </div>
     <br>
-
+<hr>
     <div class="su">
         <div style="text-align: center; margin-bottom: 20px;">
             <button class="styled-button" onclick="waterupdatechart('hourly')">Saatlik</button>
@@ -111,12 +160,24 @@
             <button class="styled-button" onclick="waterupdatechart('weekly')">Haftalık</button>
             <button class="styled-button" onclick="waterupdatechart('monthly')">Aylık</button>
         </div>
+                <!-- Tarih Seçme Alanları -->
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="margin-bottom: 10px;">
+                        <label for="start-date" style="margin-right: 10px;">Başlangıç Tarihi:</label>
+                        <input class="form-control" type="date" id="start-date" name="start-date">
+                    </div>
+                    <div>
+                        <label for="end-date" style="margin-right: 10px;">Bitiş Tarihi:</label>
+                        <input class="form-control" type="date" id="end-date" name="end-date">
+                    </div>
+                </div>
         {{-- <h3>Su Tüketim Analizi(Lt)</h3> --}}
         <div style="width:80%;height:auto;">
             <canvas id="waterchart"></canvas>
         </div>
     </div>
     <br>
+    <hr>
     <div class="yem">
         <div style="text-align: center; margin-bottom: 20px;">
             <button class="styled-button" onclick="foodupdatechart('hourly')" >Saatlik  </button>
@@ -124,7 +185,18 @@
             <button class="styled-button" onclick="foodupdatechart('weekly')" >Haftalık </button>
             <button class="styled-button" onclick="foodupdatechart('monthly')">Aylık    </button>
         </div>
-        <div style="width:80%;height:auto;">
+                <!-- Tarih Seçme Alanları -->
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="margin-bottom: 10px;">
+                        <label for="start-date" style="margin-right: 10px;">Başlangıç Tarihi:</label>
+                        <input class="form-control" type="date" id="start-date" name="start-date">
+                    </div>
+                    <div>
+                        <label for="end-date" style="margin-right: 10px;">Bitiş Tarihi:</label>
+                        <input class="form-control" type="date" id="end-date" name="end-date">
+                    </div>
+                </div>
+        <div style="width:100%;height:auto;">
             <canvas id="foodchart"></canvas>
         </div>
     </div>
@@ -134,7 +206,8 @@
 @section('js')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
+<script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
 <script>
    let waterchart;
    let foodchart;
@@ -154,6 +227,7 @@ function ortakupdatechart(mode) {
         data: { mode: mode },
        success: function(response) {
             const labels = response.map(item => {
+                if (mode === 'minutely') return item.date;
                 if (mode === 'hourly') return item.hour;
                 if (mode === 'daily') return item.date;
                 if (mode === 'weekly') return `Hafta ${item.week}`;
@@ -162,7 +236,7 @@ function ortakupdatechart(mode) {
             const isidata = response.map(item => item.isi);
             const didata = response.map(item => item.di);
             const nemdata = response.map(item => item.ne);
-            const codata = response.map(item => item.co/100);
+            const codata = response.map(item => item.co);
             
             
             ortakchart.data.labels = labels;
@@ -188,6 +262,7 @@ function isiupdatechart(mode) {
        success: function(response) {
             console.log(response);
             const labels = response.map(item => {
+                if (mode === 'minutely') return item.date;
                 if (mode === 'hourly') return item.hour;
                 if (mode === 'daily') return item.date;
                 if (mode === 'weekly') return `Hafta ${item.week}`;
@@ -218,9 +293,10 @@ function diupdatechart(mode) {
        success: function(response) {
             console.log(response);
             const labels = response.map(item => {
+                if (mode === 'minutely') return item.date;
                 if (mode === 'hourly') return item.hour;
                 if (mode === 'daily') return item.date;
-                if (mode === 'weekly') return `Hafta ${item.week}`;
+                if (mode === 'weekly') return `${item.week.toString().slice(-2)}. Hafta`;
                 if (mode === 'monthly') return `Ay ${item.month}`;
             });
             const data = response.map(item => item.di);
@@ -246,6 +322,7 @@ function nemupdatechart(mode) {
        success: function(response) {
             console.log(response);
             const labels = response.map(item => {
+                if (mode === 'minutely') return item.date;
                 if (mode === 'hourly') return item.hour;
                 if (mode === 'daily') return item.date;
                 if (mode === 'weekly') return `Hafta ${item.week}`;
@@ -274,6 +351,7 @@ function coupdatechart(mode) {
        success: function(response) {
             console.log(response);
             const labels = response.map(item => {
+                if (mode === 'minutely') return item.date;
                 if (mode === 'hourly') return item.hour;
                 if (mode === 'daily') return item.date;
                 if (mode === 'weekly') return `Hafta ${item.week}`;
@@ -373,7 +451,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const coinitialData = [];
 
     const isidata = {
-        labels: ortakinitialLabels,
+        labels: isiinitialLabels,
         datasets: [
             {
             label: 'İç Sıcaklık(°)',
@@ -381,7 +459,7 @@ document.addEventListener('DOMContentLoaded', function () {
             borderColor: '#F8071B',
             backgroundColor: 'rgba(248, 7, 27, 0.4)',
             borderWidth: 2,
-            fill: true,
+            
             tension: 0.1
         },
         {
@@ -390,7 +468,7 @@ document.addEventListener('DOMContentLoaded', function () {
             borderColor: '#00A8FF',
             backgroundColor: 'rgba(0,168,255,0.1)',
             borderWidth: 2,
-            fill: true,
+            
             tension: 0.1
         }
     ]
@@ -429,6 +507,7 @@ document.addEventListener('DOMContentLoaded', function () {
         {
             label: 'Co2(Ppm)',
             data: ortakcoinitialData,
+            yAxisID: 'y2',
             borderColor: '#87fe01',
             backgroundColor: 'rgba(135,254,1, 0.2)',
             borderWidth: 2,
@@ -471,7 +550,7 @@ document.addEventListener('DOMContentLoaded', function () {
             borderColor: '#F8071B',
             backgroundColor: 'rgba(248, 7, 27, 0.2)',
             borderWidth: 2,
-            fill: true,
+            
             tension: 0.1
         }]
     };
@@ -501,16 +580,54 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     const isiconfig = {
-        type: 'line',
-        data: isidata,
-        options: {
-            responsive: true,
-            animation: {
-        duration: 1000, // 1 saniye süren animasyon
-        easing: 'easeInOut' // Yumuşak bir geçiş animasyonu
-    }
+    type: 'line',
+    data: isidata,
+    options: {
+        responsive: true,
+        animation: {
+            duration: 1000, // 1 saniye süren animasyon
+            easing: 'easeInOut' // Yumuşak bir geçiş animasyonu
+        },
+        scales: {
+            y: {
+                min: 15, // Y ekseni minimum değeri
+                max: 40, // Y ekseni maksimum değeri
+                title: {
+                    display: true,
+                    text: 'Y Ekseni Değerleri'
+                }
+            },
+            x: {
+                title: {
+                    display: true,
+                    text: 'X Ekseni Değerleri'
+                }
+            }
+        },
+        plugins: {
+            zoom: {
+                zoom: {
+                    wheel: {
+                        enabled: true // Fare tekerleği ile zoom yapmayı etkinleştir
+                    },
+                    pinch: {
+                        enabled: true // Dokunmatik ekranlar için iki parmakla zoom yapmayı etkinleştir
+                    },
+                    mode: 'y', // Hem X hem de Y ekseni üzerinde zoom
+                    limits: {
+                        x: { min: 0, max: 10 }, // X ekseninde zoom sınırları
+                        y: { min: 0, max: 10 }  // Y ekseninde zoom sınırları
+                    }
+                },
+                pan: {
+                    enabled: true, // Pan yapmayı etkinleştir
+                    mode: 'x', // Hem X hem de Y ekseni üzerinde pan yapmayı etkinleştir
+                }
+            }
         }
-    };
+    }
+};
+
 
     const ortakconfig = {
         type: 'line',
@@ -520,6 +637,17 @@ document.addEventListener('DOMContentLoaded', function () {
             animation: {
         duration: 1000, // 1 saniye süren animasyon
         easing: 'easeInOut' // Yumuşak bir geçiş animasyonu
+    },scales:{
+        y:{
+            position:'left',
+        },
+        y2:{
+            type:'linear',
+            position:'right',
+            id:'y2',
+            min:0,
+            max:5000
+        }
     }
         }
     };
@@ -590,7 +718,12 @@ document.addEventListener('DOMContentLoaded', function () {
             animation: {
         duration: 1000, // 1 saniye süren animasyon
         easing: 'easeInOut' // Yumuşak bir geçiş animasyonu
-    }
+
+    },        scales:{
+            x:{
+                reverse:true
+            }
+        }
         }
     };
     waterchart = new Chart(document.getElementById('waterchart'),waterconfig );
@@ -603,11 +736,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     waterupdatechart('hourly');
     foodupdatechart('hourly');
-    isiupdatechart('hourly');
-    diupdatechart('hourly');
-    nemupdatechart('hourly');
-    coupdatechart('hourly');
-    ortakupdatechart('hourly');
+    isiupdatechart('minutely');
+    diupdatechart('minutely');
+    nemupdatechart('minutely');
+    coupdatechart('minutely');
+    ortakupdatechart('minutely');
 });
+document.getElementById('resetZoom').addEventListener('click', function() {
+    isichart.resetZoom();
+});
+
 </script>
 @endsection

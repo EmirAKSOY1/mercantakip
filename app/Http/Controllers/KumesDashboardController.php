@@ -153,6 +153,19 @@ class KumesDashboardController extends Controller
         $data = [];
 
         switch ($mode) {
+            case 'minutely':
+                // Son 24 saatlik veriler
+                $data = DB::table('endkon_data')
+                ->select(
+                    DB::raw('TIME(tarih) as date'),
+                    DB::raw('ISI as isi , SE as se') // Ortalama DI değeri
+                )
+                ->where('KUMES_ID', $id)
+                ->orderBy('tarih', 'desc') // En son veriler
+                ->orderBy('date', 'desc') // En son veriler
+                ->limit(30) // Son 30 kayıt
+                ->get();
+            break;
             case 'hourly':
                 // Son 24 saatlik veriler
                 $data = DB::table('endkon_data')
@@ -220,6 +233,19 @@ class KumesDashboardController extends Controller
         $data = [];
 
         switch ($mode) {
+            case 'minutely':
+                // Son 24 saatlik veriler
+                $data = DB::table('endkon_data')
+                ->select(
+                    DB::raw('TIME(tarih) as date'),
+                    DB::raw('ISI as isi ,DI as di,NE as ne ,CO as co') // Ortalama DI değeri
+                )
+                ->where('KUMES_ID', $id)
+                ->orderBy('tarih', 'desc') // En son veriler
+                ->orderBy('date', 'desc') // En son veriler
+                ->limit(30) // Son 30 kayıt
+                ->get();
+            break;
             case 'hourly':
                 // Son 24 saatlik veriler
                 $data = DB::table('endkon_data')
@@ -287,6 +313,19 @@ class KumesDashboardController extends Controller
         $data = [];
 
         switch ($mode) {
+            case 'minutely':
+                // Son 24 saatlik veriler
+                $data = DB::table('endkon_data')
+                ->select(
+                    DB::raw('TIME(tarih) as date'),
+                    DB::raw('DI as di') // Ortalama DI değeri
+                )
+                ->where('KUMES_ID', $id)
+                ->orderBy('tarih', 'desc') // En son veriler
+                ->orderBy('date', 'desc') // En son veriler
+                ->limit(30) // Son 30 kayıt
+                ->get();
+            break;
             case 'hourly':
                 // Son 24 saatlik veriler
                 $data = DB::table('endkon_data')
@@ -354,6 +393,19 @@ class KumesDashboardController extends Controller
         $data = [];
 
         switch ($mode) {
+            case 'minutely':
+                // Son 24 saatlik veriler
+                $data = DB::table('endkon_data')
+                ->select(
+                    DB::raw('TIME(created_at) as date'),
+                    DB::raw('NE as ne') // Ortalama DI değeri
+                )
+                ->where('KUMES_ID', $id)
+                ->orderBy('created_at', 'desc') // En son veriler
+                ->orderBy('date', 'desc') // En son veriler
+                ->limit(30) // Son 30 kayıt
+                ->get();
+            break;
             case 'hourly':
                 // Son 24 saatlik veriler
                 $data = DB::table('endkon_data')
@@ -420,6 +472,19 @@ class KumesDashboardController extends Controller
         $data = [];
 
         switch ($mode) {
+            case 'minutely':
+                // Son 24 saatlik veriler
+                $data = DB::table('endkon_data')
+                ->select(
+                    DB::raw('TIME(created_at) as date'),
+                    DB::raw('CO as co') // Ortalama DI değeri
+                )
+                ->where('KUMES_ID', $id)
+                ->orderBy('created_at', 'desc') // En son veriler
+                ->orderBy('date', 'desc') // En son veriler
+                ->limit(30) // Son 30 kayıt
+                ->get();
+            break;
             case 'hourly':
                 // Son 24 saatlik veriler
                 $data = DB::table('endkon_data')
@@ -473,57 +538,6 @@ class KumesDashboardController extends Controller
                     ->where('kumes_id', $id)
                     ->where('tarih', '>=', now()->subYear())
                     ->groupBy(DB::raw('MONTH(tarih)'))
-                    ->get();
-                break;
-        }
-        
-
-        return response()->json($data);
-    }
-    public function osData(Request $request, $id)
-    {
-
-        
-        $mode = $request->query('mode', 'daily'); // Varsayılan günlük veri
-        $data = [];
-
-        switch ($mode) {
-                case 'daily':
-                    // Son 7 günün günlük toplamları
-                    $data = DB::table('daily_data')
-                        ->select(
-                            DB::raw('DATE(created_at) as date'),
-                            DB::raw('SUM(os) as os')
-                        )
-                        ->where('kumes_id', $id)
-                        ->where('created_at', '>=', now()->subWeek()) // Son 7 gün
-                        ->groupBy(DB::raw('DATE(created_at)')) // Her gün için gruplama yapıyoruz
-                        ->orderBy('date', 'asc') // Tarihe göre sıralıyoruz
-                        ->get();
-                    break;
-
-                case 'weekly':
-                        // Son 4 haftalık su tüketimi
-                        $data = DB::table('daily_data')
-                            ->select(
-                                DB::raw('YEARWEEK(created_at) as week'),
-                                DB::raw('SUM(os) as os')
-                            )
-                            ->where('kumes_id', $id)
-                            ->where('created_at', '>=', now()->subMonth())
-                            ->groupBy(DB::raw('YEARWEEK(created_at)'))
-                            ->get();
-                        break;
-                case 'monthly':
-                    // Son 12 aylık su tüketimi
-                    $data = DB::table('daily_data')
-                    ->select(
-                        DB::raw('MONTH(created_at) as month'),
-                        DB::raw('SUM(os) as os')
-                    )
-                    ->where('kumes_id', $id)
-                    ->where('created_at', '>=', now()->subYear())
-                    ->groupBy(DB::raw('MONTH(created_at)'))
                     ->get();
                 break;
         }

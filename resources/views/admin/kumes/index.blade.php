@@ -16,7 +16,11 @@
 .delete-button:hover {
     background-color: #d32f2fa3;
 }
-
+@media (max-width:1600px) {
+    #seri{
+        margin:-5px;
+    }
+}
 </style>
 
 @endsection
@@ -34,6 +38,7 @@
             <thead>
               <tr>
                 <th scope="col">Kümes</th>
+                <th scope="col">Sn</th>
                 <th scope="col">Dış Isı</th>
                 <th scope="col">İç Isı</th>
                 <th scope="col">Nem</th>
@@ -56,6 +61,7 @@
                             {{ $coop->name ?? '-' }}
                         </a>
                     </th>
+                    <th>{{$coop->id}}</th>
                     
                     <th>{{ $coop->endkonData->last()->DI ?? '-' }}°C</th>
                     <th>{{ $coop->endkonData->last()->ISI ?? '-' }}°C</th>
@@ -69,13 +75,13 @@
                     <th>{{ $coop->endkonData->last()->tarih ?? '-' }}</th>
                     
                     <th>
-                        <button type="button" class="btn" onclick="window.location='{{ route('kumes.gosterge', $coop->id) }}'"><i class="fa-solid fa-gauge"></i></button> 
-                        <button type="button" class="btn" onclick="window.location='{{ route('kumes.dashboard', $coop->id) }}'"><i class="fa-solid fa-chart-line"></i></button> 
+                        <button type="button" id="seri" class="btn" onclick="window.location='{{ route('kumes.gosterge', $coop->id) }}'"><i class="fa-solid fa-gauge"></i></button> 
+                        <button type="button" id="seri" class="btn" onclick="window.location='{{ route('kumes.dashboard', $coop->id) }}'"><i class="fa-solid fa-chart-line"></i></button> 
                       
 
 
                         <div class="btn-group">
-                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button type="button" id="seri" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-file-export"></i>
                             </button>
                             <ul class="dropdown-menu">
@@ -85,7 +91,7 @@
                                     </button>
                                 </li>
                                 <li>
-                                    <button type="button" class="btn" onclick="window.location='{{ route('export.endkon.data',$coop->id) }}'">
+                                    <button type="button" id="seri" class="btn" onclick="window.location='{{ route('export.endkon.data',$coop->id) }}'">
                                         <i class="fa-solid fa-file-excel"></i> (Excel)
                                     </button>
                                 </li>
@@ -94,12 +100,12 @@
 
                         <!-- Dropdown Menü -->
                         <div class="btn-group">
-                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button type="button" class="btn dropdown-toggle" id="seri" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-ellipsis-vertical"></i>
                             </button>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <button class="dropdown-item" onclick="window.location='{{ route('kumes.edit', $coop->id) }}'">
+                                    <button class="dropdown-item" id="seri" onclick="window.location='{{ route('kumes.edit', $coop->id) }}'">
                                         <i class="fa-solid fa-pen-to-square"></i> Düzenle
                                     </button>
                                 </li>
