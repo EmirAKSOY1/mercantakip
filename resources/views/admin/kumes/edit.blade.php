@@ -31,11 +31,6 @@
                 <input type="text" class="form-control" name="name" id="exampleFormControlInput1" value="{{$kumes->name}}">
             </div>
             <br>
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Kümes Kapasitesi</label>
-                <input type="number" class="form-control" name="kapasite" id="exampleFormControlInput1" value="{{$kumes->capacity}}">
-            </div>
-            <br>
             <div id="map" style="height: 400px;"></div>
 
             <!-- Latitude ve Longitude Alanları (Gizli) -->

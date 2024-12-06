@@ -6,11 +6,11 @@
 
         .blinking-marker {
             background-color: red;
-            border-radius: 50%;
-            width: 15px;
-            height: 15px;
+            border-radius: 1%;
+            width: 1px;
+            height: 1px;
             animation: blink 1s infinite;
-            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            box-shadow: 0 0 1px rgba(255, 0, 0, 0.5);
         }
 		@keyframes blink{
             0% {
@@ -399,10 +399,10 @@ margin-top:15px;
 <script src="https://kit.fontawesome.com/dbfeb55d48.js" crossorigin="anonymous"></script>
 <script>
 
-    var map = L.map('map').setView([39.925533, 32.866287], 5);
+    var map = L.map('map').setView([39.925533, 32.866287], 4);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 8,
+        maxZoom: 20,
         attribution: '© OpenStreetMap'
     }).addTo(map);
     var arizalar = @json($arizalar);
@@ -410,7 +410,7 @@ margin-top:15px;
         if (ariza.kumes && ariza.kumes.latitude && ariza.kumes.longitude) {
             var marker = L.circleMarker([ariza.kumes.latitude, ariza.kumes.longitude], {
                 color: "red",
-                radius: 10,
+                radius: 3,
                 className: 'blinking-marker'
             }).addTo(map);
             

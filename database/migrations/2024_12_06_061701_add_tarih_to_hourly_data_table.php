@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('kumes', function (Blueprint $table) {
-            $table->dropColumn('capacity');
+        Schema::table('hourly_data', function (Blueprint $table) {
+            $table->datetime('tarih')->nullable()->after('kumes_id');
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('kumes', function (Blueprint $table) {
-            $table->integer('capacity')->nullable();
+        Schema::table('hourly_data', function (Blueprint $table) {
+            $table->dropColumn('tarih');
         });
     }
 };

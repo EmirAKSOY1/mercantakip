@@ -83,11 +83,19 @@ Route::get('/kumes/dashboard/{id}', [KumesDashboardController::class, 'index'])-
 Route::get('/kumes/{id}/chart-data', [KumesDashboardController::class, 'getData'])->name('kumes.chart-data');
 Route::get('/kumes/{id}/food-data', [KumesDashboardController::class, 'foodData'])->name('kumes.food-data');
 Route::get('/kumes/{id}/os-data', [KumesDashboardController::class, 'osData'])->name('kumes.os-data');
-Route::get('/kumes/{id}/isi-data', [KumesDashboardController::class, 'isiData'])->name('kumes.isi-data');
-Route::get('/kumes/{id}/di-data', [KumesDashboardController::class, 'diData'])->name('kumes.di-data');
+// Route::get('/kumes/{id}/isi-data', [KumesDashboardController::class, 'isiData'])->name('kumes.isi-data');
+// Route::get('/kumes/{id}/di-data', [KumesDashboardController::class, 'diData'])->name('kumes.di-data');
 Route::get('/kumes/{id}/nem-data', [KumesDashboardController::class, 'nemData'])->name('kumes.nem-data');
 Route::get('/kumes/{id}/co-data', [KumesDashboardController::class, 'coData'])->name('kumes.co-data');
 Route::get('/kumes/{id}/ortak-data', [KumesDashboardController::class, 'ortakData'])->name('kumes.ortak-data');
+
+Route::get('/kumes/{id}/di-data', [KumesDashboardController::class, 'getDiData']);
+Route::get('/kumes/{id}/isi-data', [KumesDashboardController::class, 'getisiData']);
+Route::get('/kumes/{id}/co-data', [KumesDashboardController::class, 'getcoData']);
+Route::get('/kumes/{id}/nem-data', [KumesDashboardController::class, 'getnemData']);
+Route::get('/kumes/{id}/st-data', [KumesDashboardController::class, 'getstData']);
+Route::get('/kumes/{id}/yt-data', [KumesDashboardController::class, 'getytData']);
+Route::get('/kumes/{id}/ortak-data', [KumesDashboardController::class, 'getortakData']);
 
 
 Route::post('/messages/{id}/mark-as-read', [MessageController::class, 'markAsRead'])->name('messages.markAsRead');

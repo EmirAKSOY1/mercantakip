@@ -12,6 +12,115 @@ class KumesDashboardController extends Controller
         
         return view("admin.data.kumes_dashboard",compact("id"));
     }
+
+    public function getortakData(Request $request, $id) {
+        $query = DB::table('endkon_data')
+            ->select('tarih', 'di','ne','isi','co')
+            ->where('KUMES_ID', $id);
+        if ($request->start_date && $request->end_date) {
+            $startDate = Carbon::parse($request->start_date);
+            $endDate = Carbon::parse($request->end_date);
+            $query->whereBetween('tarih', [$startDate, $endDate]);
+        }
+        $data = $query->get();
+        return response()->json($data);
+    }
+
+    public function getDiData(Request $request, $id) {
+        $query = DB::table('endkon_data')
+            ->select('tarih', 'di')
+            ->where('KUMES_ID', $id);
+        if ($request->start_date && $request->end_date) {
+            $startDate = Carbon::parse($request->start_date);
+            $endDate = Carbon::parse($request->end_date);
+            $query->whereBetween('tarih', [$startDate, $endDate]);
+        }
+        $data = $query->get();
+        return response()->json($data);
+    }
+    public function getisiData(Request $request, $id) {
+        $query = DB::table('endkon_data')
+            ->select('tarih', 'isi','se')
+            ->where('KUMES_ID', $id);
+        if ($request->start_date && $request->end_date) {
+            $startDate = Carbon::parse($request->start_date);
+            $endDate = Carbon::parse($request->end_date);
+            $query->whereBetween('tarih', [$startDate, $endDate]);
+        }
+        $data = $query->get();
+        return response()->json($data);
+    }
+    public function getcoData(Request $request, $id) {
+        $query = DB::table('endkon_data')
+            ->select('tarih', 'co')
+            ->where('KUMES_ID', $id);
+        if ($request->start_date && $request->end_date) {
+            $startDate = Carbon::parse($request->start_date);
+            $endDate = Carbon::parse($request->end_date);
+            $query->whereBetween('tarih', [$startDate, $endDate]);
+        }
+        $data = $query->get();
+        return response()->json($data);
+    }
+
+    public function getnemData(Request $request, $id) {
+        $query = DB::table('endkon_data')
+            ->select('tarih', 'ne')
+            ->where('KUMES_ID', $id);
+        if ($request->start_date && $request->end_date) {
+            $startDate = Carbon::parse($request->start_date);
+            $endDate = Carbon::parse($request->end_date);
+            $query->whereBetween('tarih', [$startDate, $endDate]);
+        }
+        $data = $query->get();
+        return response()->json($data);
+    }
+
+    public function getstData(Request $request, $id) {
+        $query = DB::table('hourly_data')
+            ->select('created_at', 'st')
+            ->where('KUMES_ID', $id);
+        if ($request->start_date && $request->end_date) {
+            $startDate = Carbon::parse($request->start_date);
+            $endDate = Carbon::parse($request->end_date);
+            $query->whereBetween('created_at', [$startDate, $endDate]);
+        }
+        $data = $query->get();
+        return response()->json($data);
+    }
+
+    public function getytData(Request $request, $id) {
+        $query = DB::table('hourly_data')
+            ->select('created_at', 'yt')
+            ->where('KUMES_ID', $id);
+        if ($request->start_date && $request->end_date) {
+            $startDate = Carbon::parse($request->start_date);
+            $endDate = Carbon::parse($request->end_date);
+            $query->whereBetween('created_at', [$startDate, $endDate]);
+        }
+        $data = $query->get();
+        return response()->json($data);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function getData(Request $request, $id)
     {
 
@@ -327,20 +436,19 @@ class KumesDashboardController extends Controller
                 ->get();
             break;
             case 'hourly':
-                // Son 24 saatlik veriler
+                // Tüm saatlik verileri almak için tarih filtresi kaldırıyoruz
                 $data = DB::table('endkon_data')
                     ->select(
-                        DB::raw('DATE(tarih) as date'),
-                        DB::raw('HOUR(tarih) as hour'),
-                        DB::raw('AVG(DI) as di')
+                        DB::raw('tarih as date'),
+                        
+                        DB::raw('MINUTE(tarih) as minute'),
+                        'DI'  // Doğrudan DI (Dış Sıcaklık) değerini alıyoruz
                     )
                     ->where('KUMES_ID', $id)
-                    ->where('tarih', '>=', now()->subDay()) // Son 24 saat
-                    ->groupBy(DB::raw('DATE(tarih)'), DB::raw('HOUR(tarih)')) // Tarih ve saat gruplaması
-                    ->orderBy('date', 'asc')
-                    ->orderBy('hour', 'asc')
+                    ->orderBy('tarih', 'asc') // Verileri tarih sırasına göre alıyoruz
                     ->get();
                 break;
+            
             
 
                 case 'daily':

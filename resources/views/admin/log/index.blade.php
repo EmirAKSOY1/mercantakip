@@ -19,6 +19,21 @@
 @endsection
 @section('content') 
 <div class="container">
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Kullanıcı Adı</label>
+        <form method="GET" action="{{ route('admin_log.index') }}" class="mb-3">
+            <div class="input-group">
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    name="user_name" 
+                    id="exampleFormControlInput1" 
+                    value="{{ request('user_name') }}" 
+                    placeholder="Kullanıcı Adı Ara">
+                <button class="btn btn-primary" type="submit">Ara</button>
+            </div>
+        </form>
+    </div>
 	<div class="row">
         <table class="table table-striped">
             <thead>

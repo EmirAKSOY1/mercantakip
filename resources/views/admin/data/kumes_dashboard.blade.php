@@ -29,731 +29,770 @@
         width:40%;
     }
 </style>
+
+@endsection
+<script src="https://cdn.jsdelivr.net/npm/jquery"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-@endsection
+
+
+
 @section('content') 
+   
 
-<div class="container">
-    <br>
-        <div style="text-align: center; margin-bottom: 20px;">
-            <button class="styled-button" onclick="ortakupdatechart('minutely')" >Dakikalık </button>
-            <button class="styled-button" onclick="ortakupdatechart('hourly')" >Saatlik </button>
-            <button class="styled-button" onclick="ortakupdatechart('daily')"  >Günlük  </button>
-            <button class="styled-button" onclick="ortakupdatechart('weekly')" >Haftalık</button>
-            <button class="styled-button" onclick="ortakupdatechart('monthly')">Aylık   </button>
-            <input class="form-control" type="date" id="tarih_araligi" name="start-date" placeholder="Tarih Aralığı Seçiniz...">
-        </div>
-
-        <div style="width:100%;height:auto;">
-            <canvas id="ortakchart"></canvas>
-        </div>
-    </div>
-    <br>
-    <hr>
-    <div class="isi">
-        <div style="text-align: center; margin-bottom: 20px;">
-            <button class="styled-button" onclick="isiupdatechart('minutely')">Dakikalık </button>
-            <button class="styled-button" onclick="isiupdatechart('hourly')"  >Saatlik </button>
-            <button class="styled-button" onclick="isiupdatechart('daily')"   >Günlük  </button>
-            <button class="styled-button" onclick="isiupdatechart('weekly')"  >Haftalık</button>
-            <button class="styled-button" onclick="isiupdatechart('monthly')" >Aylık   </button>
-        </div>
-                <!-- Tarih Seçme Alanları -->
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="margin-bottom: 10px;">
-                        <label for="start-date" style="margin-right: 10px;">Başlangıç Tarihi:</label>
-                        <input class="form-control" type="date" id="start-date" name="start-date">
-                    </div>
-                    <div>
-                        <label for="end-date" style="margin-right: 10px;">Bitiş Tarihi:</label>
-                        <input class="form-control" type="date" id="end-date" name="end-date">
-                    </div>
-                </div>
-        <div style="width:100%;height:auto;">
-            <canvas id="isichart"></canvas>
-        </div>
-        
-    </div>
-    <br>
-<hr>
-
-    <div class="di">
-        <div style="text-align: center; margin-bottom: 20px;">
-            <button class="styled-button" onclick="diupdatechart('minutely')">Dakikalık </button>
-            <button class="styled-button" onclick="diupdatechart('hourly')">Saatlik </button>
-            <button class="styled-button" onclick="diupdatechart('daily')">Günlük  </button>
-            <button class="styled-button" onclick="diupdatechart('weekly')">Haftalık</button>
-            <button class="styled-button" onclick="diupdatechart('monthly')">Aylık   </button>
-        </div>
-    
-        <!-- Tarih Seçme Alanları -->
-        <div style="text-align: center; margin-bottom: 20px;">
-            <div style="margin-bottom: 10px;">
-                <label for="start-date" style="margin-right: 10px;">Başlangıç Tarihi:</label>
-                <input class="form-control" type="date" id="start-date" name="start-date">
+            <div style="text-align: center;">
+                <input class="form-control" type="text" id="ortak-range"  placeholder="Tarih Aralığı Seçin">
             </div>
-            <div>
-                <label for="end-date" style="margin-right: 10px;">Bitiş Tarihi:</label>
-                <input class="form-control" type="date" id="end-date" name="end-date">
-            </div>
-        </div>
-    
-        <div style="width: 80%; height: auto;">
-            <canvas id="dichart"></canvas>
-        </div>
-    </div>
-    
-    <br>
-    <hr>
-    <div class="nem">
-        <div style="text-align: center; margin-bottom: 20px;">
-            <button class="styled-button" onclick="nemupdatechart('minutely')">Dakikalık </button>
-            <button class="styled-button" onclick="nemupdatechart('hourly')" >Saatlik </button>
-            <button class="styled-button" onclick="nemupdatechart('daily')"  >Günlük  </button>
-            <button class="styled-button" onclick="nemupdatechart('weekly')" >Haftalık</button>
-            <button class="styled-button" onclick="nemupdatechart('monthly')">Aylık   </button>
-        </div>
-                <!-- Tarih Seçme Alanları -->
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="margin-bottom: 10px;">
-                        <label for="start-date" style="margin-right: 10px;">Başlangıç Tarihi:</label>
-                        <input class="form-control" type="date" id="start-date" name="start-date">
-                    </div>
-                    <div>
-                        <label for="end-date" style="margin-right: 10px;">Bitiş Tarihi:</label>
-                        <input class="form-control" type="date" id="end-date" name="end-date">
-                    </div>
-                </div>
-        {{-- <h3>Nem Analizi(°)</h3> --}}
-        <div style="width:80%;height:auto;">
-            <canvas id="nemchart"></canvas>
-        </div>
-    </div>
-    <br>
+            <br>
+            <br>
+            <br>
+            <div id="ortak-chart" ></div>
 
-    <div class="co">
-        <div style="text-align: center; margin-bottom: 20px;">
-            <button class="styled-button" onclick="coupdatechart('minutely')" >Dakikalık </button>
-            <button class="styled-button" onclick="coupdatechart('hourly')" >Saatlik </button>
-            <button class="styled-button" onclick="coupdatechart('daily')"  >Günlük  </button>
-            <button class="styled-button" onclick="coupdatechart('weekly')" >Haftalık</button>
-            <button class="styled-button" onclick="coupdatechart('monthly')">Aylık   </button>
+        <hr>
+
+            <br>
+            <br>
+            <br>
+            <div style="text-align: center;">
+                <input class="form-control" type="text" id="isi-range"  placeholder="Tarih Aralığı Seçin">
+            </div>
+            <br>
+            <br>
+            <br>
+            <div id="isi-chart"></div>
+
+            <hr>
+
+            <br>
+            <br>
+            <br>
+            <div style="text-align: center;">
+                <input class="form-control" type="text" id="di-range"  placeholder="Tarih Aralığı Seçin">
+            </div>
+            <br>
+            <br>
+            <br>
+            <div id="di-chart"></div>
+
+        <hr>
+        <br>
+        <br>
+        <br>
+        <div style="text-align: center;">
+            <input class="form-control" type="text" id="co-range"  placeholder="Tarih Aralığı Seçin">
         </div>
-        {{-- <h3>Co2 Analizi(ppm)</h3> --}}
-        <div style="width:80%;height:auto;">
-            <canvas id="cochart"></canvas>
+        <br>
+        <br>
+        <br>
+        <div id="co-chart"></div>
+        <hr>
+
+        <br>
+        <br>
+        <br>
+        <div style="text-align: center;">
+            <input class="form-control" type="text" id="nem-range"  placeholder="Tarih Aralığı Seçin">
         </div>
-    </div>
-    <br>
-<hr>
-    <div class="su">
-        <div style="text-align: center; margin-bottom: 20px;">
-            <button class="styled-button" onclick="waterupdatechart('hourly')">Saatlik</button>
-            <button class="styled-button" onclick="waterupdatechart('daily')">Günlük</button>
-            <button class="styled-button" onclick="waterupdatechart('weekly')">Haftalık</button>
-            <button class="styled-button" onclick="waterupdatechart('monthly')">Aylık</button>
+        <br>
+        <br>
+        <br>
+        <div id="nem-chart"></div>
+        <hr>
+
+        <br>
+        <br>
+        <br>
+        <div style="text-align: center;">
+            <input class="form-control" type="text" id="st-range"  placeholder="Tarih Aralığı Seçin">
         </div>
-                <!-- Tarih Seçme Alanları -->
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="margin-bottom: 10px;">
-                        <label for="start-date" style="margin-right: 10px;">Başlangıç Tarihi:</label>
-                        <input class="form-control" type="date" id="start-date" name="start-date">
-                    </div>
-                    <div>
-                        <label for="end-date" style="margin-right: 10px;">Bitiş Tarihi:</label>
-                        <input class="form-control" type="date" id="end-date" name="end-date">
-                    </div>
-                </div>
-        {{-- <h3>Su Tüketim Analizi(Lt)</h3> --}}
-        <div style="width:80%;height:auto;">
-            <canvas id="waterchart"></canvas>
+        <br>
+        <br>
+        <br>
+        <div id="st-chart"></div>
+        <hr>
+
+        <br>
+        <br>
+        <br>
+        <div style="text-align: center;">
+            <input class="form-control" type="text" id="yt-range"  placeholder="Tarih Aralığı Seçin">
         </div>
-    </div>
-    <br>
-    <hr>
-    <div class="yem">
-        <div style="text-align: center; margin-bottom: 20px;">
-            <button class="styled-button" onclick="foodupdatechart('hourly')" >Saatlik  </button>
-            <button class="styled-button" onclick="foodupdatechart('daily')"  >Günlük   </button>
-            <button class="styled-button" onclick="foodupdatechart('weekly')" >Haftalık </button>
-            <button class="styled-button" onclick="foodupdatechart('monthly')">Aylık    </button>
-        </div>
-                <!-- Tarih Seçme Alanları -->
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="margin-bottom: 10px;">
-                        <label for="start-date" style="margin-right: 10px;">Başlangıç Tarihi:</label>
-                        <input class="form-control" type="date" id="start-date" name="start-date">
-                    </div>
-                    <div>
-                        <label for="end-date" style="margin-right: 10px;">Bitiş Tarihi:</label>
-                        <input class="form-control" type="date" id="end-date" name="end-date">
-                    </div>
-                </div>
-        <div style="width:100%;height:auto;">
-            <canvas id="foodchart"></canvas>
-        </div>
-    </div>
-</div>
+        <br>
+        <br>
+        <br>
+        <div id="yt-chart"></div>
+        <hr>
+ 
+
 @endsection
-
 @section('js')
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
-<script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
-<script>
-   let waterchart;
-   let foodchart;
-   let isichart;
-   let dichart;
-   let nemchart;
-   let cochart;
-   let ortakchart;
-
-function ortakupdatechart(mode) {
-    const kumesId = "{{ $id }}";
-    const chartDataUrl = `{{ url('kumes') }}/${kumesId}/ortak-data`;
-    
-    $.ajax({
-        url: chartDataUrl,
-        method: 'GET',
-        data: { mode: mode },
-       success: function(response) {
-            const labels = response.map(item => {
-                if (mode === 'minutely') return item.date;
-                if (mode === 'hourly') return item.hour;
-                if (mode === 'daily') return item.date;
-                if (mode === 'weekly') return `Hafta ${item.week}`;
-                if (mode === 'monthly') return `Ay ${item.month}`;
-            });
-            const isidata = response.map(item => item.isi);
-            const didata = response.map(item => item.di);
-            const nemdata = response.map(item => item.ne);
-            const codata = response.map(item => item.co);
-            
-            
-            ortakchart.data.labels = labels;
-            ortakchart.data.datasets[0].data = isidata;
-            ortakchart.data.datasets[1].data = didata;
-            ortakchart.data.datasets[2].data = nemdata;
-            ortakchart.data.datasets[3].data = codata;
-            ortakchart.update();
-        },
-        error: function(error) {
-            console.log("Veri çekme hatası:", error);
-        }
-    });
-}
-function isiupdatechart(mode) {
-    const kumesId = "{{ $id }}";
-    const chartDataUrl = `{{ url('kumes') }}/${kumesId}/isi-data`;
-    
-    $.ajax({
-        url: chartDataUrl,
-        method: 'GET',
-        data: { mode: mode },
-       success: function(response) {
-            console.log(response);
-            const labels = response.map(item => {
-                if (mode === 'minutely') return item.date;
-                if (mode === 'hourly') return item.hour;
-                if (mode === 'daily') return item.date;
-                if (mode === 'weekly') return `Hafta ${item.week}`;
-                if (mode === 'monthly') return `Ay ${item.month}`;
-            });
-            const data = response.map(item => item.isi);
-            const sedata = response.map(item => item.se);
-            
-            
-            isichart.data.labels = labels;
-            isichart.data.datasets[0].data = data;
-            isichart.data.datasets[1].data = sedata;
-            isichart.update();
-        },
-        error: function(error) {
-            console.log("Veri çekme hatası:", error);
-        }
-    });
-}
-function diupdatechart(mode) {
-    const kumesId = "{{ $id }}";
-    const chartDataUrl = `{{ url('kumes') }}/${kumesId}/di-data`;
-    
-    $.ajax({
-        url: chartDataUrl,
-        method: 'GET',
-        data: { mode: mode },
-       success: function(response) {
-            console.log(response);
-            const labels = response.map(item => {
-                if (mode === 'minutely') return item.date;
-                if (mode === 'hourly') return item.hour;
-                if (mode === 'daily') return item.date;
-                if (mode === 'weekly') return `${item.week.toString().slice(-2)}. Hafta`;
-                if (mode === 'monthly') return `Ay ${item.month}`;
-            });
-            const data = response.map(item => item.di);
-            
-            
-            dichart.data.labels = labels;
-            dichart.data.datasets[0].data = data;
-            dichart.update();
-        },
-        error: function(error) {
-            console.log("Veri çekme hatası:", error);
-        }
-    });
-}
-function nemupdatechart(mode) {
-    const kumesId = "{{ $id }}";
-    const chartDataUrl = `{{ url('kumes') }}/${kumesId}/nem-data`;
-    
-    $.ajax({
-        url: chartDataUrl,
-        method: 'GET',
-        data: { mode: mode },
-       success: function(response) {
-            console.log(response);
-            const labels = response.map(item => {
-                if (mode === 'minutely') return item.date;
-                if (mode === 'hourly') return item.hour;
-                if (mode === 'daily') return item.date;
-                if (mode === 'weekly') return `Hafta ${item.week}`;
-                if (mode === 'monthly') return `Ay ${item.month}`;
-            });
-            const data = response.map(item => item.ne);
-            
-            
-            nemchart.data.labels = labels;
-            nemchart.data.datasets[0].data = data;
-            nemchart.update();
-        },
-        error: function(error) {
-            console.log("Veri çekme hatası:", error);
-        }
-    });
-}
-function coupdatechart(mode) {
-    const kumesId = "{{ $id }}";
-    const chartDataUrl = `{{ url('kumes') }}/${kumesId}/co-data`;
-    
-    $.ajax({
-        url: chartDataUrl,
-        method: 'GET',
-        data: { mode: mode },
-       success: function(response) {
-            console.log(response);
-            const labels = response.map(item => {
-                if (mode === 'minutely') return item.date;
-                if (mode === 'hourly') return item.hour;
-                if (mode === 'daily') return item.date;
-                if (mode === 'weekly') return `Hafta ${item.week}`;
-                if (mode === 'monthly') return `Ay ${item.month}`;
-            });
-            const data = response.map(item => item.co);
-            
-            
-            cochart.data.labels = labels;
-            cochart.data.datasets[0].data = data;
-            cochart.update();
-        },
-        error: function(error) {
-            console.log("Veri çekme hatası:", error);
-        }
-    });
-}
-function waterupdatechart(mode) {
-    const kumesId = "{{ $id }}";
-    const chartDataUrl = `{{ url('kumes') }}/${kumesId}/chart-data`;
-    $.ajax({
-        url: chartDataUrl,
-        method: 'GET',
-        data: { mode: mode },
-       success: function(response) {
-            console.log(response);
-            const labels = response.map(item => {
-                if (mode === 'hourly') return item.hour;
-                if (mode === 'daily') return item.date;
-                if (mode === 'weekly') return `Hafta ${item.week}`;
-                if (mode === 'monthly') return `Ay ${item.month}`;
-            });
-            const data = response.map(item => item.st);
-
-            waterchart.data.labels = labels;
-            waterchart.data.datasets[0].data = data;
-            waterchart.update();
-        },
-        error: function(error) {
-            console.log("Veri çekme hatası:", error);
-        }
-    });
-}
-
-
-function foodupdatechart(mode) {
-    const kumesId = "{{ $id }}";
-    const foodchartDataUrl = `{{ url('kumes') }}/${kumesId}/food-data`;
-    $.ajax({
-        url: foodchartDataUrl,
-        method: 'GET',
-        data: { mode: mode },
-       success: function(response) {
-            console.log(response);
-            const labels = response.map(item => {
-                if (mode === 'hourly') return item.hour;
-                if (mode === 'daily') return item.date;
-                if (mode === 'weekly') return `Hafta ${item.week}`;
-                if (mode === 'monthly') return `Ay ${item.month}`;
-            });
-            const data = response.map(item => item.yt);
-
-            foodchart.data.labels = labels;
-            foodchart.data.datasets[0].data = data;
-            foodchart.update();
-        },
-        error: function(error) {
-            console.log("Veri çekme hatası:", error);
-        }
-    });
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-    const waterinitialLabels = [];
-    const waterinitialData = [];
-
-    const foodinitialLabels = [];
-    const foodinitialData = [];
-
-    const isiinitialLabels = [];
-    const isiinitialData = [];
-    const seinitialData = [];
-
-    const ortakinitialLabels = [];
-    const ortakisiinitialData = [];
-    const ortakdiinitialData = [];
-    const ortakneminitialData = [];
-    const ortakcoinitialData = [];
-
-    const diinitialLabels = [];
-    const diinitialData = [];
-
-    const neminitialLabels = [];
-    const neminitialData = [];
-
-    const coinitialLabels = [];
-    const coinitialData = [];
-
-    const isidata = {
-        labels: isiinitialLabels,
-        datasets: [
-            {
-            label: 'İç Sıcaklık(°)',
-            data: isiinitialData,
-            borderColor: '#F8071B',
-            backgroundColor: 'rgba(248, 7, 27, 0.4)',
-            borderWidth: 2,
-            
-            tension: 0.1
-        },
-        {
-            label: 'Set Isı(°)',
-            data: seinitialData,
-            borderColor: '#00A8FF',
-            backgroundColor: 'rgba(0,168,255,0.1)',
-            borderWidth: 2,
-            
-            tension: 0.1
-        }
-    ]
-    };
-
-    const ortakdata = {
-        labels: ortakinitialLabels,
-        datasets: [
-            {
-            label: 'İç Sıcaklık(°)',
-            data: ortakisiinitialData,
-            borderColor: '#e16d00',
-            backgroundColor: 'rgba(225,109,0, 0.4)',
-            borderWidth: 2,
-            
-            tension: 0.1
-        },
-        {
-            label: 'Dış Sıcaklık(°)',
-            data: ortakdiinitialData,
-            borderColor: '#F8071B',
-            backgroundColor: 'rgba(248, 7, 27, 0.4)',
-            borderWidth: 2,
-            
-            tension: 0.1
-        },
-        {
-            label: 'Nem(%)',
-            data: ortakneminitialData,
-            borderColor: '#00A8FF',
-            backgroundColor: 'rgba(0,168,255,0.1)',
-            borderWidth: 2,
-            
-            tension: 0.1
-        },
-        {
-            label: 'Co2(Ppm)',
-            data: ortakcoinitialData,
-            yAxisID: 'y2',
-            borderColor: '#87fe01',
-            backgroundColor: 'rgba(135,254,1, 0.2)',
-            borderWidth: 2,
-            
-            tension: 0.1
-        }
-    ]
-    };
-
-
-    const nemdata = {
-        labels: neminitialLabels,
-        datasets: [{
-            label: 'Nem(%)',
-            data: neminitialData,
-            borderColor: '#2cd3c4',
-            backgroundColor: 'rgba(204, 229, 255, 0.2)',
-            borderWidth: 2,
-            fill: true,
-            tension: 0.1
-        }]
-    };
-    const codata = {
-        labels: coinitialLabels,
-        datasets: [{
-            label: 'Co2(ppm)',
-            data: coinitialData,
-            borderColor: '#87fe01',
-            backgroundColor: 'rgba(135,254,1, 0.2)',
-            borderWidth: 2,
-            fill: true,
-            tension: 0.1
-        }]
-    };
-    const didata = {
-        labels: diinitialLabels,
-        datasets: [{
-            label: 'Dış Sıcaklık(°)',
-            data: diinitialData,
-            borderColor: '#F8071B',
-            backgroundColor: 'rgba(248, 7, 27, 0.2)',
-            borderWidth: 2,
-            
-            tension: 0.1
-        }]
-    };
-    const waterdata = {
-        labels: waterinitialLabels,
-        datasets: [{
-            label: 'Su(Lt)',
-            data: waterinitialData,
-            borderColor: 'rgba(75, 192, 192, 1)',
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderWidth: 2,
-            fill: true,
-            tension: 0.4
-        }]
-    };
-    const fooddata = {
-        labels: foodinitialLabels,
-        datasets: [{
-            label: 'Yem(Kg)',
-            data: foodinitialData,
-            borderColor: 'rgba(245, 176, 65, 1)',
-            backgroundColor: 'rgba(245, 176, 65, 0.2)',
-            borderWidth: 2,
-            fill: true,
-            tension: 0.4
-        }]
-    };
-
-    const isiconfig = {
-    type: 'line',
-    data: isidata,
-    options: {
-        responsive: true,
-        animation: {
-            duration: 1000, // 1 saniye süren animasyon
-            easing: 'easeInOut' // Yumuşak bir geçiş animasyonu
-        },
-        scales: {
-            y: {
-                min: 15, // Y ekseni minimum değeri
-                max: 40, // Y ekseni maksimum değeri
-                title: {
-                    display: true,
-                    text: 'Y Ekseni Değerleri'
-                }
-            },
-            x: {
-                title: {
-                    display: true,
-                    text: 'X Ekseni Değerleri'
-                }
-            }
-        },
-        plugins: {
-            zoom: {
-                zoom: {
-                    wheel: {
-                        enabled: true // Fare tekerleği ile zoom yapmayı etkinleştir
-                    },
-                    pinch: {
-                        enabled: true // Dokunmatik ekranlar için iki parmakla zoom yapmayı etkinleştir
-                    },
-                    mode: 'y', // Hem X hem de Y ekseni üzerinde zoom
-                    limits: {
-                        x: { min: 0, max: 10 }, // X ekseninde zoom sınırları
-                        y: { min: 0, max: 10 }  // Y ekseninde zoom sınırları
-                    }
-                },
-                pan: {
-                    enabled: true, // Pan yapmayı etkinleştir
-                    mode: 'x', // Hem X hem de Y ekseni üzerinde pan yapmayı etkinleştir
-                }
-            }
-        }
-    }
-};
-
-
-    const ortakconfig = {
-        type: 'line',
-        data: ortakdata,
-        options: {
-            responsive: true,
-            animation: {
-        duration: 1000, // 1 saniye süren animasyon
-        easing: 'easeInOut' // Yumuşak bir geçiş animasyonu
-    },scales:{
-        y:{
-            position:'left',
-        },
-        y2:{
-            type:'linear',
-            position:'right',
-            id:'y2',
-            min:0,
-            max:5000
-        }
-    }
-        }
-    };
-
-    const waterconfig = {
-        type: 'line',
-        data: waterdata,
-        options: {
-            responsive: true,
-            scales: {
-                y: { beginAtZero: true }
-            }
-        }
-    };
-    const nemconfig = {
-        type: 'line',
-        data: nemdata,
-        options: {
-            responsive: true,
-            animation: {
-        duration: 1000, // 1 saniye süren animasyon
-        easing: 'easeInOut' // Yumuşak bir geçiş animasyonu
-    },
-            scales: {
-                y: { min: 10 ,
-                    max:100,
-                    ticks: {
-                stepSize: 10
-            }
-                }
-            }
-        }
-    };
-    const coconfig = {
-        type: 'line',
-        data: codata,
-        options: {
-            responsive: true,
-            animation: {
-        duration: 1000, // 1 saniye süren animasyon
-        easing: 'easeInOut' // Yumuşak bir geçiş animasyonu
-    },
-            scales: {
-                y: { min: 1000 ,
-                    max:4000,
-                    ticks: {
-                stepSize: 500
-            }
-                }
-            }
-        }
-    };
-    const foodconfig = {
-        type: 'line',
-        data: fooddata,
-        options: {
-            responsive: true,
-            scales: {
-                y: { beginAtZero: true }
-            }
-        }
-    };
-    const diconfig = {
-        type: 'line',
-        data: didata,
-        options: {
-            responsive: true,
-            animation: {
-        duration: 1000, // 1 saniye süren animasyon
-        easing: 'easeInOut' // Yumuşak bir geçiş animasyonu
-
-    }
-        }
-    };
-    waterchart = new Chart(document.getElementById('waterchart'),waterconfig );
-    foodchart = new Chart(document.getElementById('foodchart'),foodconfig );
-    isichart = new Chart(document.getElementById('isichart'),isiconfig );
-    dichart = new Chart(document.getElementById('dichart'),diconfig );
-    nemchart = new Chart(document.getElementById('nemchart'),nemconfig );
-    cochart = new Chart(document.getElementById('cochart'),coconfig );
-    ortakchart = new Chart(document.getElementById('ortakchart'),ortakconfig );
-
-    waterupdatechart('hourly');
-    foodupdatechart('hourly');
-    isiupdatechart('minutely');
-    diupdatechart('minutely');
-    nemupdatechart('minutely');
-    coupdatechart('minutely');
-    ortakupdatechart('minutely');
-});
-
-</script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/tr.js"></script>
-<script>
-    // flatpickr ile tarih aralığı seçimi
-    flatpickr("#tarih_araligi", {
-        mode: "range",  // range modunda, başlangıç ve bitiş tarihi seçilebilir
-        dateFormat: "d-m-Y",  // Tarih formatı
-         locale: "tr",
-        onChange: function(selectedDates, dateStr, instance) {
-            if (selectedDates.length == 2) {
-                const [startDate, endDate] = selectedDates;
-                // Tarihleri konsola yazdır
-                console.log(`Başlangıç Tarihi: ${startDate.toLocaleDateString()}`);
-                console.log(`Bitiş Tarihi: ${endDate.toLocaleDateString()}`);
 
-                // Eğer başlangıç tarihi, bitiş tarihinden büyükse uyarı ver
-                if (startDate > endDate) {
-                    alert('Başlangıç tarihi, bitiş tarihinden büyük olamaz!');
-                }
+<script>
+    /*Flatpickr Başlangıcı*/
+
+    flatpickr("#ortak-range", {
+        mode: "range",
+        dateFormat: "Y-m-d",
+        locale:"tr",
+        onChange: function(selectedDates, dateStr, instance) {
+        if (selectedDates.length === 2) {
+            let [startDate, endDate] = selectedDates;
+            
+            
+            startDate.setDate(startDate.getDate() + 1);
+            endDate.setDate(endDate.getDate() + 1);
+
+            const formattedStartDate = startDate.toISOString().split("T")[0];
+            const formattedEndDate = endDate.toISOString().split("T")[0];
+
+            ortakData(formattedStartDate, formattedEndDate);
+        }
+    }
+});
+
+        flatpickr("#isi-range", {
+        mode: "range",
+        dateFormat: "Y-m-d",
+        locale:"tr",
+        onChange: function(selectedDates, dateStr, instance) {
+        if (selectedDates.length === 2) {
+            let [startDate, endDate] = selectedDates;
+            
+            
+            startDate.setDate(startDate.getDate() + 1);
+            endDate.setDate(endDate.getDate() + 1);
+
+            const formattedStartDate = startDate.toISOString().split("T")[0];
+            const formattedEndDate = endDate.toISOString().split("T")[0];
+
+            isiData(formattedStartDate, formattedEndDate);
+        }
+            }
+        });
+flatpickr("#di-range", {
+        mode: "range",
+        dateFormat: "Y-m-d",
+        locale:"tr",
+        onChange: function(selectedDates, dateStr, instance) {
+        if (selectedDates.length === 2) {
+            let [startDate, endDate] = selectedDates;
+            
+            
+            startDate.setDate(startDate.getDate() + 1);
+            endDate.setDate(endDate.getDate() + 1);
+
+            const formattedStartDate = startDate.toISOString().split("T")[0];
+            const formattedEndDate = endDate.toISOString().split("T")[0];
+
+            diData(formattedStartDate, formattedEndDate);
+        }
+    }
+});
+
+flatpickr("#co-range", {
+        mode: "range",
+        dateFormat: "Y-m-d",
+        locale:"tr",
+        onChange: function(selectedDates, dateStr, instance) {
+        if (selectedDates.length === 2) {
+            let [startDate, endDate] = selectedDates;
+            
+            
+            startDate.setDate(startDate.getDate() + 1);
+            endDate.setDate(endDate.getDate() + 1);
+
+            const formattedStartDate = startDate.toISOString().split("T")[0];
+            const formattedEndDate = endDate.toISOString().split("T")[0];
+
+            coData(formattedStartDate, formattedEndDate);
+        }
+    }
+});
+
+
+flatpickr("#nem-range", {
+        mode: "range",
+        dateFormat: "Y-m-d",
+        locale:"tr",
+        onChange: function(selectedDates, dateStr, instance) {
+        if (selectedDates.length === 2) {
+            let [startDate, endDate] = selectedDates;
+            
+            
+            startDate.setDate(startDate.getDate() + 1);
+            endDate.setDate(endDate.getDate() + 1);
+
+            const formattedStartDate = startDate.toISOString().split("T")[0];
+            const formattedEndDate = endDate.toISOString().split("T")[0];
+
+            nemData(formattedStartDate, formattedEndDate);
+        }
+    }
+});
+
+flatpickr("#st-range", {
+        mode: "range",
+        dateFormat: "Y-m-d",
+        locale:"tr",
+        onChange: function(selectedDates, dateStr, instance) {
+        if (selectedDates.length === 2) {
+            let [startDate, endDate] = selectedDates;
+            
+            
+            startDate.setDate(startDate.getDate() + 1);
+            endDate.setDate(endDate.getDate() + 1);
+
+            const formattedStartDate = startDate.toISOString().split("T")[0];
+            const formattedEndDate = endDate.toISOString().split("T")[0];
+
+            stData(formattedStartDate, formattedEndDate);
+        }
+    }
+});
+
+flatpickr("#yt-range", {
+        mode: "range",
+        dateFormat: "Y-m-d",
+        locale:"tr",
+        onChange: function(selectedDates, dateStr, instance) {
+        if (selectedDates.length === 2) {
+            let [startDate, endDate] = selectedDates;
+            
+            
+            startDate.setDate(startDate.getDate() + 1);
+            endDate.setDate(endDate.getDate() + 1);
+
+            const formattedStartDate = startDate.toISOString().split("T")[0];
+            const formattedEndDate = endDate.toISOString().split("T")[0];
+
+            ytData(formattedStartDate, formattedEndDate);
+        }
+    }
+});
+/*Flatpickr Bitişi*/
+
+/*Ajax fomksiyonları başlangıcı*/
+
+
+function ortakData(startDate = '', endDate = '') {
+    const kumesId = "{{ $id }}";
+        $.ajax({
+            url: `/kumes/${kumesId}/ortak-data`,
+            method: 'GET',
+            data: { start_date: startDate, end_date: endDate },
+            success: function(response) {
+                const labels = response.map(item => item.tarih);
+                const data = response.map(item => item.isi);
+                const datadi = response.map(item => item.di);
+                const datanem = response.map(item => item.ne);
+                //console.log(response);
+                ortakChart.updateOptions({
+                    xaxis: {
+                        categories: labels,
+                        type: 'datetime'
+                    }
+                });
+
+                ortakChart.updateSeries([{
+                    name: "ısı Sıcaklık (°C)",
+                    data: data
+                },{
+                    name: 'Dış Sıcaklık (°C)',
+                    data: datadi
+                },{
+                    name: 'Nem(%)',
+                    data: datanem
+                }]);
+            },
+            error: function(error) {
+                console.error("Veri çekme hatası:", error);
+            }
+        });
+    }
+
+    function isiData(startDate = '', endDate = '') {
+    const kumesId = "{{ $id }}";
+        $.ajax({
+            url: `/kumes/${kumesId}/isi-data`,
+            method: 'GET',
+            data: { start_date: startDate, end_date: endDate },
+            success: function(response) {
+                const labels = response.map(item => item.tarih);
+                const data = response.map(item => item.isi);
+                const datase = response.map(item => item.se);
+                //console.log(response);
+                isiChart.updateOptions({
+                    xaxis: {
+                        categories: labels,
+                        type: 'datetime'
+                    }
+                });
+
+                isiChart.updateSeries([{
+                    name: "ısı Sıcaklık (°C)",
+                    data: data
+                },{
+                    name: 'Set Isı (°C)',
+                    data: datase
+                }]);
+            },
+            error: function(error) {
+                console.error("Veri çekme hatası:", error);
+            }
+        });
+    }
+    function diData(startDate = '', endDate = '') {
+    const kumesId = "{{ $id }}";
+        $.ajax({
+            url: `/kumes/${kumesId}/di-data`,
+            method: 'GET',
+            data: { start_date: startDate, end_date: endDate },
+            success: function(response) {
+                const labels = response.map(item => item.tarih);
+                const data = response.map(item => item.di);
+                //console.log(response);
+                diChart.updateOptions({
+                    xaxis: {
+                        categories: labels,
+                        type: 'datetime'
+                    }
+                });
+
+                diChart.updateSeries([{
+                    name: "Dış Sıcaklık (°C)",
+                    data: data
+                }]);
+            },
+            error: function(error) {
+                console.error("Veri çekme hatası:", error);
+            }
+        });
+    }
+    function coData(startDate = '', endDate = '') {
+    const kumesId = "{{ $id }}";
+        $.ajax({
+            url: `/kumes/${kumesId}/co-data`,
+            method: 'GET',
+            data: { start_date: startDate, end_date: endDate },
+            success: function(response) {
+                const labels = response.map(item => item.tarih);
+                const data = response.map(item => item.co);
+                //console.log(response);
+                coChart.updateOptions({
+                    xaxis: {
+                        categories: labels,
+                        type: 'datetime'
+                    }
+                });
+
+                coChart.updateSeries([{
+                    name: "Co2(pPM)",
+                    data: data
+                }]);
+            },
+            error: function(error) {
+                console.error("Veri çekme hatası:", error);
+            }
+        });
+    }
+
+    function nemData(startDate = '', endDate = '') {
+    const kumesId = "{{ $id }}";
+        $.ajax({
+            url: `/kumes/${kumesId}/nem-data`,
+            method: 'GET',
+            data: { start_date: startDate, end_date: endDate },
+            success: function(response) {
+                const labels = response.map(item => item.tarih);
+                const data = response.map(item => item.ne);
+                //console.log(response);
+                nemChart.updateOptions({
+                    xaxis: {
+                        categories: labels,
+                        type: 'datetime'
+                    }
+                });
+
+                nemChart.updateSeries([{
+                    name: "Nem(%)",
+                    data: data
+                }]);
+            },
+            error: function(error) {
+                console.error("Veri çekme hatası:", error);
+            }
+        });
+    }
+
+    function stData(startDate = '', endDate = '') {
+    const kumesId = "{{ $id }}";
+        $.ajax({
+            url: `/kumes/${kumesId}/st-data`,
+            method: 'GET',
+            data: { start_date: startDate, end_date: endDate },
+            success: function(response) {
+                const labels = response.map(item => item.created_at);
+                const data = response.map(item => item.st);
+                //console.log(response);
+                stChart.updateOptions({
+                    xaxis: {
+                        categories: labels,
+                        type: 'datetime'
+                    }
+                });
+
+                stChart.updateSeries([{
+                    name: "Su Tüketimi(Lt)",
+                    data: data
+                }]);
+            },
+            error: function(error) {
+                console.error("Veri çekme hatası:", error);
+            }
+        });
+    }
+
+    function ytData(startDate = '', endDate = '') {
+    const kumesId = "{{ $id }}";
+        $.ajax({
+            url: `/kumes/${kumesId}/yt-data`,
+            method: 'GET',
+            data: { start_date: startDate, end_date: endDate },
+            success: function(response) {
+                const labels = response.map(item => item.created_at);
+                const data = response.map(item => item.yt);
+                //console.log(response);
+                ytChart.updateOptions({
+                    xaxis: {
+                        categories: labels,
+                        type: 'datetime'
+                    }
+                });
+
+                ytChart.updateSeries([{
+                    name: "Yem Tüketimi(Kg)",
+                    data: data
+                }]);
+            },
+            error: function(error) {
+                console.error("Veri çekme hatası:", error);
+            }
+        });
+    }
+    /*Ajax fomksiyonları Bitişi*/
+
+    /*Chart Config*/
+
+
+
+
+
+
+    const ortakChart = new ApexCharts(document.querySelector("#ortak-chart"), {
+    chart: {
+        type: 'line',
+        height: 350
+    },
+    series: [{
+        name: 'İç Sıcaklık (°C)',
+        data: [] // Başlangıçta boş
+    }],
+    xaxis: {
+        type: 'datetime',
+        categories: [],
+        labels: {
+            formatter: function(value) {
+                const date = new Date(value);
+                return date.toLocaleString('tr-TR', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                });
             }
         }
-    });
+    },
+    title: {
+    text: 'Ortak Grafik',
+    align: 'center',
+    style: {
+        fontSize: '16px',  // Başlık yazı boyutu
+        fontWeight: 'bold',  // Başlık kalınlık
+        color: '#0056b3'  // Başlık rengi
+    }
+},
+    stroke: {
+        width: 3,
+        curve: 'smooth'
+    }
+});
+
+
+    const isiChart = new ApexCharts(document.querySelector("#isi-chart"), {
+    chart: {
+        type: 'line',
+        height: 350
+    },
+    series: [{
+        name: 'İç Sıcaklık (°C)',
+        data: [] // Başlangıçta boş
+    }],
+    xaxis: {
+        type: 'datetime',
+        categories: [],
+        labels: {
+            formatter: function(value) {
+                const date = new Date(value);
+                return date.toLocaleString('tr-TR', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                });
+            }
+        }
+    },
+    title: {
+    text: 'İç Sıcaklık Grafiği',
+    align: 'center',
+    style: {
+        fontSize: '16px',  // Başlık yazı boyutu
+        fontWeight: 'bold',  // Başlık kalınlık
+        color: '#0056b3'  // Başlık rengi
+    }
+},
+    stroke: {
+        width: 3,
+        curve: 'smooth'
+    }
+});
+const diChart = new ApexCharts(document.querySelector("#di-chart"), {
+    chart: {
+        type: 'line',
+        height: 350
+    },
+    series: [{
+        name: 'Dış Sıcaklık (°C)',
+        data: [] // Başlangıçta boş
+    }],
+    xaxis: {
+        type: 'datetime',
+        categories: [],
+        labels: {
+            formatter: function(value) {
+                const date = new Date(value);
+                return date.toLocaleString('tr-TR', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                });
+            }
+        }
+    },
+    title: {
+    text: 'Dış Sıcaklık Grafiği',
+    align: 'center',
+    style: {
+        fontSize: '16px',  // Başlık yazı boyutu
+        fontWeight: 'bold',  // Başlık kalınlık
+        color: '#0056b3'  // Başlık rengi
+    }
+},
+    stroke: {
+        width: 3,
+        curve: 'smooth'
+    }
+});
+
+const coChart = new ApexCharts(document.querySelector("#co-chart"), {
+    chart: {
+        type: 'line',
+        height: 350
+    },
+    series: [{
+        name: 'Co2(ppm)',
+        data: [] // Başlangıçta boş
+    }],
+    xaxis: {
+        type: 'datetime',
+        categories: [],
+        labels: {
+            formatter: function(value) {
+                const date = new Date(value);
+                return date.toLocaleString('tr-TR', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                });
+            }
+        }
+    },
+    title: {
+    text: 'Co2 Grafiği',
+    align: 'center',
+    style: {
+        fontSize: '16px',  // Başlık yazı boyutu
+        fontWeight: 'bold',  // Başlık kalınlık
+        color: '#0056b3'  // Başlık rengi
+    }
+},
+    stroke: {
+        width: 3,
+        curve: 'smooth'
+    }
+});
+
+
+const nemChart = new ApexCharts(document.querySelector("#nem-chart"), {
+    chart: {
+        type: 'line',
+        height: 350
+    },
+    series: [{
+        name: 'Nem(%)',
+        data: [] // Başlangıçta boş
+    }],
+    xaxis: {
+        type: 'datetime',
+        categories: [],
+        labels: {
+            formatter: function(value) {
+                const date = new Date(value);
+                return date.toLocaleString('tr-TR', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                });
+            }
+        }
+    },
+    title: {
+    text: 'Nem Grafiği',
+    align: 'center',
+    style: {
+        fontSize: '16px',  // Başlık yazı boyutu
+        fontWeight: 'bold',  // Başlık kalınlık
+        color: '#0056b3'  // Başlık rengi
+    }
+},
+    stroke: {
+        width: 3,
+        curve: 'smooth'
+    }
+});
+
+const stChart = new ApexCharts(document.querySelector("#st-chart"), {
+    chart: {
+        type: 'line',
+        height: 350
+    },
+    series: [{
+        name: 'Su Tüketimi(Lt)',
+        data: [] // Başlangıçta boş
+    }],
+    xaxis: {
+        type: 'datetime',
+        categories: [],
+        labels: {
+            formatter: function(value) {
+                const date = new Date(value);
+                return date.toLocaleString('tr-TR', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                });
+            }
+        }
+    },
+    title: {
+    text: 'Su Tüketim Grafiği Grafiği',
+    align: 'center',
+    style: {
+        fontSize: '16px',  // Başlık yazı boyutu
+        fontWeight: 'bold',  // Başlık kalınlık
+        color: '#0056b3'  // Başlık rengi
+    }
+},
+    stroke: {
+        width: 3,
+        curve: 'smooth'
+    }
+});
+
+const ytChart = new ApexCharts(document.querySelector("#yt-chart"), {
+    chart: {
+        type: 'line',
+        height: 350
+    },
+    series: [{
+        name: 'Yem Tüketimi(Kg)',
+        data: [] // Başlangıçta boş
+    }],
+    xaxis: {
+        type: 'datetime',
+        categories: [],
+        labels: {
+            formatter: function(value) {
+                const date = new Date(value);
+                return date.toLocaleString('tr-TR', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                });
+            }
+        }
+    },
+    title: {
+    text: 'Yem Tüketim Grafiği',
+    align: 'center',
+    style: {
+        fontSize: '16px',  // Başlık yazı boyutu
+        fontWeight: 'bold',  // Başlık kalınlık
+        color: '#0056b3'  // Başlık rengi
+    }
+},
+    stroke: {
+        width: 3,
+        curve: 'smooth'
+    }
+});
+/*Chart Config*/
+
+    isiChart.render();
+    diChart.render();
+    coChart.render();
+    nemChart.render();
+    stChart.render();
+    ytChart.render();
+    ortakChart.render();
+
+    isiData();
+    diData();
+    coData();
+    nemData();
+    stData();
+    ytData();
+    ortakData();
 </script>
 @endsection
